@@ -1,35 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const MessageFetcher = () => {
- const [message, setMessage] = useState("");
- const [loading, setLoading] = useState(true);
- const [error, setError] = useState("");
-
+ const [second, setSecond] = useState("");
  useEffect(() => {
-  const fetchMessage = async () => {
+  const fetchlaravel = async () => {
    try {
-    const response = await fetch("/api/message");
-    if (!response.ok) {
-     throw new Error("Network response was not ok");
-    }
-    const data = await response.json();
-    setMessage(data.message);
+    const { data } = await axios.get("http://127.0.0.1:8000/");
+    setSecond(data.message);
+    console.log(data.message);
    } catch (error) {
-    setError(error.message);
-   } finally {
-    setLoading(false);
+    console.log(error.message);
    }
   };
-
-  fetchMessage();
+  fetchlaravel();
  }, []);
- return (
-  <div>
-   {loading && <p>Loading...</p>}
-   {error && <p>Error: {error}</p>}
-   {!loading && !error && <p>Message: {message}</p>}
-  </div>
- );
+
+ return <div>MessageFetcher {second}</div>;
 };
 
 export default MessageFetcher;

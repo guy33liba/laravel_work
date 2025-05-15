@@ -1,14 +1,11 @@
 <?php
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie', '/'],
+    'paths' => ['*'], // Allow all paths
     'allowed_methods' => ['*'],
-    'allowed_origins' => [
-        'http://localhost:5173',
-        'http://127.0.0.1:5173',
-    ], // Allow Vite development server
+    'allowed_origins' => ['*'], // Allow all origins for development
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
-    'exposed_headers' => ['Authorization', 'Content-Type'], // Add specific headers
+    'exposed_headers' => ['Authorization', 'Content-Type'],
     'max_age' => 0,
-    'supports_credentials' => true, // Ensure credentials support
+    'supports_credentials' => true,
 ];
