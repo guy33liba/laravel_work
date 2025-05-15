@@ -11,13 +11,15 @@ function App() {
   const fetchlaravel = async () => {
    try {
     const { data } = await axios.get("http://127.0.0.1:8000/");
-    console.log(data.message);
+    setMessage(data.message);
    } catch (error) {
     console.log(error.message);
    }
   };
   fetchlaravel();
  }, []);
+
+ 
 
  return <>hello {message}</>;
 }
