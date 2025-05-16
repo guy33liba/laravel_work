@@ -1,7 +1,7 @@
 .usersContainer {
  display: flex;
  width: 70%;
- height: 600px;
+ height: 400px;
  gap: 50px;
  flex-wrap: wrap;
 }
@@ -14,4 +14,16 @@ body {
  box-sizing: border-box;
  margin: 0;
  padding: 0;
+}
+.helloCard {
+ width: 700px;
+ height: 150px;
+ background-color: #f9f9f9;
+ border-radius: 10px;
+ color: black;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ transition: transform 0.3s ease;
 }

@@ -45,16 +45,18 @@ function App() {
  }, []);
  return (
   <>
-   hello {one}
    <header>
     <img src={reactLogo} width={50} alt="" />
     <img src={viteLogo} width={50} alt="" />
     <h1>Welcome to the CRM Dashboard</h1>
    </header>
-   <h2>Laravel API Message:</h2>
-   <MessageFetcher />
+   <div className="helloCard">
+    <h2>Laravel API Message:</h2>
+    hello {one}
+    {three}
+    <MessageFetcher />
+   </div>
    <NewUsersFetcher />
-   {three}
   </>
  );
 }
