@@ -4,15 +4,17 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import axios from "axios";
 import MessageFetcher from "./components/MessageFetcher";
+import NewUsersFetcher from "./components/NewUsersFetcher";
 
 function App() {
- const [message, setMessage] = useState("");
- const [second, setSecond] = useState("");
+ const [one, setOne] = useState("");
+ const [two, setTwo] = useState("");
+ const [three, setThree] = useState("");
  useEffect(() => {
   const fetchlaravel = async () => {
    try {
     const { data } = await axios.get("http://127.0.0.1:8000/message");
-    setMessage(data.message);
+    setOne(data.message);
    } catch (error) {
     console.log(error.message);
    }
@@ -23,17 +25,27 @@ function App() {
   const fetchlaravel = async () => {
    try {
     const { data } = await axios.get("http://127.0.0.1:8000/");
-    setSecond(data.message);
+    setTwo(data.message);
    } catch (error) {
     console.log(error.message);
    }
   };
   fetchlaravel();
  }, []);
-
+ useEffect(() => {
+  const helloWorld = async () => {
+   try {
+    const { data } = await axios.get("http://127.0.0.1:8000/hello");
+    setThree(data.message);
+   } catch (error) {
+    console.log(error.message);
+   }
+  };
+  helloWorld();
+ }, []);
  return (
   <>
-   hello {message}
+   hello {one}
    <header>
     <img src={reactLogo} width={50} alt="" />
     <img src={viteLogo} width={50} alt="" />
@@ -41,6 +53,8 @@ function App() {
    </header>
    <h2>Laravel API Message:</h2>
    <MessageFetcher />
+   <NewUsersFetcher />
+   {three}
   </>
  );
 }
