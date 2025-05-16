@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 const FormPost = () => {
  const [form, setForm] = useState({
@@ -11,36 +12,55 @@ const FormPost = () => {
  };
  const handleSubmit = async (e) => {
   e.preventDefault();
+  try {
+   // Fetch CSRF token
+   const { data } = await axios.get("http://127.0.0.1:8000/csrf-token", { withCredentials: true });
+   // Send POST request with CSRF token in headers
+   await axios.post("http://127.0.0.1:8000/newUser", form, {
+    headers: {
+     "X-CSRF-TOKEN": data.csrf_token,
+    },
+    withCredentials: true,
+   });
+   alert("User Added");
+   setForm({ name: "", email: "", password: "" });
+  } catch (error) {
+   alert(`Error: ${error.response?.data?.message || error.message}`);
+  }
  };
  return (
-  <div>
+  <div className="formPost">
    <h1>Form post</h1>
    <form onSubmit={handleSubmit} style={{ marginBottom: "30px" }}>
-    <input
-     type="text"
-     name="name"
-     placeholder="name"
-     value={form.name}
-     onChange={handleChange}
-     required
-    />
-    <input
-     type="text"
-     name="email"
-     placeholder="Email"
-     value={form.email}
-     onChange={handleChange}
-     required
-    />
-    <input
-     type="password"
-     name="password"
-     placeholder="Password"
-     value={form.password}
-     onChange={handleChange}
-     required
-    />
-    <button type="submit">Add User</button>
+    <div style={{ marginTop: "20px" }}>
+     <input
+      type="text"
+      name="name"
+      placeholder="name"
+      value={form.name}
+      onChange={handleChange}
+      required
+     />
+     <input
+      type="text"
+      name="email"
+      placeholder="Email"
+      value={form.email}
+      onChange={handleChange}
+      required
+     />
+     <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      value={form.password}
+      onChange={handleChange}
+      required
+     />
+    </div>
+    <button type="submit" style={{ marginTop: "20px" }}>
+     Add User
+    </button>
    </form>
   </div>
  );

@@ -30,7 +30,7 @@ const MessageFetcher = () => {
  }, []);
  return (
   <div>
-   MessageFetcher {one}
+   MessageFetcher :: {one}
    <h2>{two}</h2>
   </div>
  );

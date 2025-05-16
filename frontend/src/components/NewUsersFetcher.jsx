@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const NewUsersFetcher = () => {
@@ -14,10 +14,10 @@ const NewUsersFetcher = () => {
    }
   };
   fetchUsers();
- });
+ }, []);
  return (
   <div>
-   <h2>New Users</h2>
+   <h2 style={{ margin: "20px" }}>New Users</h2>
    <div className="usersContainer">
     {users &&
      users.map((user) => (
@@ -25,6 +25,7 @@ const NewUsersFetcher = () => {
        <span>id: {user.id}</span>
        <p>{user.name}</p>
        <p>{user.email}</p>
+       <p>{user.created_at}</p>
       </div>
      ))}
    </div>
