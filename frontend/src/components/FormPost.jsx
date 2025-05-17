@@ -8,20 +8,13 @@ const FormPost = () => {
   password: "",
  });
  const handleChange = (e) => {
-  setForm(() => ({ ...form, [e.target.name]: e.target.value }));
+  setForm({ ...form, [e.target.name]: e.target.value });
  };
  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-   // Fetch CSRF token
-   const { data } = await axios.get("http://127.0.0.1:8000/csrf-token", { withCredentials: true });
-   // Send POST request with CSRF token in headers
-   await axios.post("http://127.0.0.1:8000/newUser", form, {
-    headers: {
-     "X-CSRF-TOKEN": data.csrf_token,
-    },
-    withCredentials: true,
-   });
+   // Remove CSRF cookie call
+   await axios.post("http://127.0.0.1:8000/api/newUser", form);
    alert("User Added");
    setForm({ name: "", email: "", password: "" });
   } catch (error) {
